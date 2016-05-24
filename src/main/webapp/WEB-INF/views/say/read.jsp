@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../include/header.jsp"%>
 
 <form role="form" method="post">
 	<input type='hidden' name='sno' value="${sayVO.sno }">
+	 <input type='hidden' name='page' value="${cri.page }">
+	 <input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 </form>
 
 
@@ -40,9 +41,9 @@
 						<!-- /.box-tools -->
 					</div>
 					<!-- /.box-header -->
-					
+
 					<div class="box-body no-border">${sayVO.body}</div>
-					
+
 					<div class="box-body">
 						<img class="img-responsive pad"
 							src="/resources/dist/img/photo2.png" alt="Photo">
@@ -114,22 +115,24 @@
 <!-- /.content-wrapper -->
 
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		var formObj = $("form[role='form']");
 		console.log(formObj);
-		
-		$("#modify").on("click", function(){
+
+		$("#modify").on("click", function() {
 			formObj.attr("action", "/say/modify");
 			formObj.attr("method", "get");
 			formObj.submit();
 		});
-		
-		$("#remove").on("click", function(){
+
+		$("#remove").on("click", function() {
 			formObj.attr("action", "/say/remove");
 			formObj.submit();
 		});
-		$("#list").on("click", function(){
-			self.location = "/say/sayList";
+		$("#list").on("click", function() {
+			formObj.attr("method", "get");
+			formObj.attr("action", "/say/sayList");
+			formObj.submit();
 		});
 	});
 </script>

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.towntalk.domain.Criteria;
 import com.towntalk.domain.SayVO;
 
 @Repository
@@ -37,8 +38,14 @@ public class SayDAOImpl implements SayDAO {
 	}
 
 	@Override
-	public List<SayVO> sayList() throws Exception {
-		return session.selectList(namespace + ".sayList");
+	public List<SayVO> sayList(Criteria cri) throws Exception {
+
+		return session.selectList(namespace + ".sayList", cri);
+	}
+
+	@Override
+	public int cntPaging(Criteria cri) throws Exception {
+		return session.selectOne(namespace + ".cntPaging", cri);
 	}
 
 }

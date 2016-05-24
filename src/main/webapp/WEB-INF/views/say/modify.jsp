@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../include/header.jsp"%>
 
@@ -34,6 +33,11 @@
 					</div>
 					<!-- /.box-header -->
 					<form role="form" method="post">
+						<input type='hidden' name='page' value="${cri.page}">
+						<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+<%-- 						<input type='hidden' name='user_id' value="${sayVO.user_id}">
+						<input type='hidden' name='created_at' value="${sayVO.created_at }"> --%>
+						
 						<div class="box-body no-border">
 							<!-- textarea -->
 							<div class="form-group">
@@ -115,18 +119,19 @@
 <!-- /.content-wrapper -->
 
 <script>
-	$(document).ready(function() {
+	$(document).ready(	function() {
 		var formObj = $("form[role='form']");
+		
 		console.log(formObj);
-
+		
+		$("#cancel").on("click", function() {
+			self.location = "/say/sayList?page=${cri.page}&perPageNum=${cri.perPageNum}";
+			});
+		
 		$("#save").on("click", function() {
 			formObj.submit();
+			});
 		});
-
-		$("#cancel").on("click", function() {
-			self.location = "/say/sayList";
-		});
-	});
 </script>
 
 <%@ include file="../include/footer.jsp"%>

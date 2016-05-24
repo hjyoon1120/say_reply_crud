@@ -2,6 +2,7 @@ package com.towntalk.service;
 
 import java.util.List;
 
+import com.towntalk.domain.Criteria;
 import com.towntalk.domain.SayVO;
 
 public interface SayService {
@@ -14,6 +15,7 @@ public interface SayService {
 	
 	public void remove(Integer sno) throws Exception;
 	
-	public List<SayVO> sayList() throws Exception;
+	public List<SayVO> sayList(Criteria cri) throws Exception;
 
+	public int cntCriteria(Criteria cri) throws Exception;
 }

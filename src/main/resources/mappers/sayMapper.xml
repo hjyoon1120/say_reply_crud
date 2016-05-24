@@ -36,7 +36,15 @@
     	from tb_say 
     	where id > 0 
     	order by id desc, created_at desc
+    	limit #{pageStart}, #{perPageNum}
     	]]>
 	</select>
+	
+	<select id="cntPaging" resultType="int">
+		<![CDATA[
+		select count(id) from tb_say where id > 0
+		]]>
+	</select>
+	
 
 </mapper>

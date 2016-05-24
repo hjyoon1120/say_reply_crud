@@ -1,5 +1,7 @@
 package com.towntalk.test;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
@@ -9,14 +11,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import com.towntalk.domain.Criteria;
 import com.towntalk.domain.SayVO;
 import com.towntalk.persistence.SayDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/**/*.xml" })
 public class SayDAOTest {
-	
+
 	protected static final Logger logger = LoggerFactory.getLogger(DataSource.class);
 
 	@Inject
@@ -46,6 +51,36 @@ public class SayDAOTest {
 	@Test
 	public void testDelete() throws Exception {
 		dao.delete(896);
+	}
+
+	@Test
+	public void testListPage() throws Exception {
+		Criteria cri = new Criteria();
+		cri.setPage(2);
+		cri.setPerPageNum(20);
+
+		List<SayVO> list = dao.sayList(cri);
+
+		for (SayVO sayVO : list) {
+			logger.info(sayVO.getSno() + ":" + sayVO.getBody());
+		}
+	}
+
+	@Test
+	public void testURI() throws Exception {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().path("/say/read").queryParam("sno", 12)
+				.queryParam("perPageNum", 20).build();
+
+		logger.info("/say/read?sno=12&perPageNum=20");
+		logger.info(uriComponents.toString());
+	}
+	@Test
+	public void testURI2() throws Exception {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().path("/{module}/{page}").queryParam("sno", 12)
+				.queryParam("perPageNum", 20).build().expand("say", "read").encode();
+
+		logger.info("/say/read?sno=12&perPageNum=20");
+		logger.info(uriComponents.toString());
 	}
 
 }

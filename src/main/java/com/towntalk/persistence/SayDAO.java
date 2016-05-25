@@ -17,6 +17,6 @@ public interface SayDAO {
 
 	public List<SayVO> sayList(Criteria cri) throws Exception;
 	
-	public int cntPaging(Criteria cri) throws Exception;
+	public int listCnt(Criteria cri) throws Exception;
 	
 }

@@ -50,7 +50,7 @@ public class SayController {
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCnt(service.cntCriteria(cri));
+		pageMaker.setTotalCnt(service.listCnt(cri));
 
 		model.addAttribute("pageMaker", pageMaker);
 	}
@@ -67,6 +67,7 @@ public class SayController {
 
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("keyword", cri.getKeyword());
 		rttr.addFlashAttribute("msg", "del");
 
 		return "redirect:/say/sayList";
@@ -86,6 +87,7 @@ public class SayController {
 
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("keyword", cri.getKeyword());
 		rttr.addFlashAttribute("msg", "mod");
 
 		return "redirect:/say/sayList";

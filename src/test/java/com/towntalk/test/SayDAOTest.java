@@ -82,5 +82,24 @@ public class SayDAOTest {
 		logger.info("/say/read?sno=12&perPageNum=20");
 		logger.info(uriComponents.toString());
 	}
+	
+	@Test
+	public void testDynamic1() throws Exception {
+		
+		Criteria cri = new Criteria();
+		
+		cri.setPage(1);
+		cri.setKeyword("검색어");
+		
+		logger.info("=======================");
+		List<SayVO> list = dao.sayList(cri);
+		
+		for (SayVO sayVO : list) {
+			logger.info(sayVO.getSno() + ": " + sayVO.getBody());
+		}
+		
+		logger.info("========================");
+		logger.info("COUNT: " + dao.listCnt(cri));
+	}
 
 }

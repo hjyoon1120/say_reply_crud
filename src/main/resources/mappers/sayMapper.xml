@@ -7,14 +7,17 @@
 
 	<insert id="create">
 		insert into tb_say (
-		user_id, body, latitude, longitude, img_src)
+		user_id, body, latitude,
+		longitude, img_src)
 		values(
-		#{user_id}, #{body}, 11.999999, 123.444444, 'abcdefg')
+		#{user_id}, #{body}, 11.999999, 123.444444,
+		'abcdefg')
 	</insert>
 
 	<select id="read" resultType="SayVO">
 		select
-		id, user_id, body, latitude, longitude, img_src, created_at, updated_at,
+		id, user_id, body, latitude,
+		longitude, img_src, created_at, updated_at,
 		cnt_like, cnt_comment
 		from
 		tb_say
@@ -35,16 +38,31 @@
  		select id, user_id, body, latitude, longitude,  img_src, created_at, updated_at, cnt_like, cnt_comment 
     	from tb_say 
     	where id > 0 
+    	]]>
+
+		<include refid="search"></include>
+    	
+    	<![CDATA[
     	order by id desc, created_at desc
     	limit #{pageStart}, #{perPageNum}
     	]]>
 	</select>
-	
-	<select id="cntPaging" resultType="int">
+
+	<select id="listCnt" resultType="int">
 		<![CDATA[
 		select count(id) from tb_say where id > 0
 		]]>
+
+		<include refid="search"></include>
+
 	</select>
-	
+
+	<sql id="search">
+		<if test="keyword!=null">
+			and ( user_id like CONCAT('%', #{keyword}, '%') or body
+			like CONCAT('%', #{keyword}, '%'))
+		</if>
+	</sql>
+
 
 </mapper>

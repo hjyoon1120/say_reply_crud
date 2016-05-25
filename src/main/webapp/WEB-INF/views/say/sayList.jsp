@@ -43,7 +43,7 @@
 						</div>
 						<!-- /.box-header -->
 						<a
-							href='/say/read${pageMaker.makeQuery(pageMaker.cri.page)}&sno=${sayVO.sno}'>
+							href='/say/read${pageMaker.makeSearch(pageMaker.cri.page)}&sno=${sayVO.sno}'>
 							<div class="box-body no-border">${sayVO.body}</div>
 						</a>
 						<div class="box-body">
@@ -110,11 +110,15 @@
 			</div>
 			<!-- /.col -->
 
+		</div>
+		<!-- /.row -->
+		
+		
 			<div class="text-center">
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev}">
 						<li><a
-							href="sayList${pageMaker.makeQuery(pageMaker.startPage-1)}">
+							href="sayList${pageMaker.makeSearch(pageMaker.startPage-1)}">
 								&laquo;</a></li>
 					</c:if>
 
@@ -122,20 +126,18 @@
 						end="${pageMaker.endPage}" var="idx">
 						<li
 							<c:out value="${pageMaker.cri.page == idx ? 'class = active ' : ''}"/>>
-							<a href="sayList${pageMaker.makeQuery(idx)}">${idx}</a>
+							<a href="sayList${pageMaker.makeSearch(idx)}">${idx}</a>
 						</li>
 					</c:forEach>
 
 					<c:if test="${pageMaker.next && pageMaker.endPage >0}">
 						<li><a
-							href="sayList${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+							href="sayList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 					</c:if>
 				</ul>
 				<!-- /.pagination -->
 			</div>
 			<!-- /.text-center -->
-		</div>
-		<!-- /.row -->
 
 	</section>
 	<!-- /.content -->

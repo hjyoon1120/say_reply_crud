@@ -41,8 +41,8 @@ public class SayServiceImpl implements SayService {
 	}
 
 	@Override
-	public int cntCriteria(Criteria cri) throws Exception {
-		return dao.cntPaging(cri);
+	public int listCnt(Criteria cri) throws Exception {
+		return dao.listCnt(cri);
 	}
 
 }

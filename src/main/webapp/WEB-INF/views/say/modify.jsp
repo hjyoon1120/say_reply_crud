@@ -17,8 +17,8 @@
 							<img class='img-circle'
 								src='/resources/dist/img/user1-128x128.jpg' alt='user image'>
 							<span class='username'><a href="personelSay.html">${sayVO.user_id}</a></span>
-							<span class='description'><fmt:formatDate
-									pattern="yyyy-MM-dd HH:mm" value="${sayVO.created_at }" /></span>
+						<%-- 	<span class='description'><fmt:formatDate
+									pattern="yyyy-MM-dd HH:mm" value="${sayVO.created_at }" /></span> --%>
 						</div>
 						<!-- /.user-block -->
 						<div class='box-tools'>
@@ -35,8 +35,7 @@
 					<form role="form" method="post">
 						<input type='hidden' name='page' value="${cri.page}">
 						<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-<%-- 						<input type='hidden' name='user_id' value="${sayVO.user_id}">
-						<input type='hidden' name='created_at' value="${sayVO.created_at }"> --%>
+<%-- 						<input type='hidden' name='keyword' value="${cri.keyword}"> --%>
 						
 						<div class="box-body no-border">
 							<!-- textarea -->
@@ -125,7 +124,8 @@
 		console.log(formObj);
 		
 		$("#cancel").on("click", function() {
-			self.location = "/say/sayList?page=${cri.page}&perPageNum=${cri.perPageNum}";
+			self.location = "/say/sayList?page=${cri.page}&perPageNum=${cri.perPageNum}"
+					+ "&keyword=${cri.keyword}";
 			});
 		
 		$("#save").on("click", function() {

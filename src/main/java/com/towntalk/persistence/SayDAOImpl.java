@@ -44,8 +44,8 @@ public class SayDAOImpl implements SayDAO {
 	}
 
 	@Override
-	public int cntPaging(Criteria cri) throws Exception {
-		return session.selectOne(namespace + ".cntPaging", cri);
+	public int listCnt(Criteria cri) throws Exception {
+		return session.selectOne(namespace + ".listCnt", cri);
 	}
 
 }
